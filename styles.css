@@ -30,72 +30,161 @@ a { text-decoration: none; color: inherit; }
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 0 48px; /* gutters on desktop */
+  padding: 0 48px;
 }
 
-@media (max-width: 960px) {
-  /* Mobile: swipeable carousel for benefits (no JS) */
-  .carousel-btn {
-    display: none;
-  }
-
-  .benefits-carousel {
-    padding: 0; /* remove desktop arrow padding */
-  }
-
-  .benefits-track {
-    height: auto;
-    position: static;
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
-  }
-
-  .benefits-track::-webkit-scrollbar {
-    height: 0;
-  }
-
-  .benefits-track .feature-card {
-    position: static;
-    width: auto;
-    flex: 0 0 85%;
-    scroll-snap-align: start;
-    transform: none;
-    opacity: 1;
-    filter: none;
-    pointer-events: auto; /* restore clicking on mobile */
-    transition: none;     /* avoid odd animations when swiping */
-  }
-
-.benefits-track .feature-card.is-active {
-  pointer-events: auto;
-  transform: translateX(-50%) scale(1);
-  opacity: 1;
-  z-index: 3;
+.section {
+  padding: 60px 0;
+  background: var(--white);
 }
 
-.benefits-track .feature-card.is-prev {
-  transform: translateX(calc(-50% - 420px)) scale(0.88);
-  opacity: 0.65;
-  z-index: 2;
+.section-ice {
+  background: var(--ice);
 }
 
-.benefits-track .feature-card.is-next {
-  transform: translateX(calc(-50% + 420px)) scale(0.88);
-  opacity: 0.65;
-  z-index: 2;
+/* ===== NAV ===== */
+.nav {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
 }
 
-.benefits-track .feature-card.is-hidden {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-50%) scale(0.86);
-  z-index: 1;
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
 }
 
+.logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  transition: 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn-small {
+  padding: 8px 14px;
+  border-radius: 999px;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.btn-primary:hover { background: var(--coral); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--midnight);
+  border-color: rgba(22, 30, 84, 0.25);
+}
+
+.btn-secondary:hover {
+  border-color: var(--coral);
+  color: var(--coral);
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 100px 0 80px;
+  background: var(--ice);
+}
+
+.hero-content {
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  margin: 0 0 24px;
+  font-weight: 800;
+  color: var(--midnight);
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.device-frame {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(22, 30, 84, 0.12);
+  box-shadow: 0 10px 40px rgba(22, 30, 84, 0.12);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.device-placeholder {
+  height: 480px;
+  border-radius: var(--radius-md);
+  background: rgba(22, 30, 84, 0.12);
+}
+
+/* ===== BENEFITS ===== */
+.benefits-carousel {
+  position: relative;
+  padding: 0 72px; /* space for arrows on desktop */
+}
+
+.benefits-tabs {
+  display: none; /* desktop hides tabs */
+}
+
+.benefits-track {
+  position: relative;
+  height: 360px;
+  overflow: visible;
+  outline: none;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--midnight);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+  z-index: 50;
+}
+
+.carousel-btn--prev { left: 8px; }
+.carousel-btn--next { right: 8px; }
+
+.carousel-btn:hover {
+  color: var(--coral);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Card base */
 .feature-card {
   background: var(--white);
   border: 1px solid rgba(22, 30, 84, 0.12);
@@ -127,6 +216,44 @@ a { text-decoration: none; color: inherit; }
   outline-offset: 0;
 }
 
+/* Desktop overlap layout */
+.benefits-track .feature-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(680px, 100%);
+  transform: translateX(-50%);
+  transition: transform 520ms cubic-bezier(0.22, 0.65, 0.3, 1), opacity 520ms ease;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.benefits-track .feature-card.is-active {
+  pointer-events: auto;
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+
+.benefits-track .feature-card.is-prev {
+  transform: translateX(calc(-50% - 420px)) scale(0.88);
+  opacity: 0.65;
+  z-index: 2;
+}
+
+.benefits-track .feature-card.is-next {
+  transform: translateX(calc(-50% + 420px)) scale(0.88);
+  opacity: 0.65;
+  z-index: 2;
+}
+
+.benefits-track .feature-card.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(0.86);
+  z-index: 1;
+}
+
 /* ===== SIGNUP ===== */
 .signup {
   display: grid;
@@ -137,13 +264,13 @@ a { text-decoration: none; color: inherit; }
 
 .signup-left h2 {
   font-size: 36px;
-  margin-bottom: 12px;
+  margin: 0 0 12px;
   color: var(--midnight);
 }
 
 .signup-left p {
   opacity: 0.85;
-  margin-bottom: 20px;
+  margin: 0 0 20px;
 }
 
 .input-placeholder {
@@ -153,7 +280,6 @@ a { text-decoration: none; color: inherit; }
   border-radius: 6px;
   margin-bottom: 20px;
   outline: 2px solid rgba(255, 152, 106, 0.35);
-  outline-offset: 0;
 }
 
 .signup-right {
@@ -185,9 +311,7 @@ a { text-decoration: none; color: inherit; }
   opacity: 0.9;
 }
 
-.footer-links a:hover {
-  color: var(--coral);
-}
+.footer-links a:hover { color: var(--coral); }
 
 .footer-icons {
   display: flex;
@@ -206,8 +330,6 @@ a { text-decoration: none; color: inherit; }
 .icon img {
   width: 18px;
   height: 18px;
-  max-width: 100%;
-  max-height: 100%;
   object-fit: contain;
   display: block;
 }
@@ -220,36 +342,55 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 960px) {
-  /* Mobile: swipeable carousel for benefits (no JS) */
-  .carousel-btn {
-    display: none;
+  .container { padding: 0 24px; }
+
+  /* Benefits: tabs + stacked card */
+  .benefits-carousel { padding: 0; }
+  .carousel-btn { display: none; }
+
+  .benefits-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .tab {
+    border: 1px solid rgba(22, 30, 84, 0.18);
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--midnight);
+    padding: 10px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .tab.is-active {
+    background: rgba(255, 152, 106, 0.22);
+    border-color: rgba(255, 152, 106, 0.65);
   }
 
   .benefits-track {
-    height: auto;
     position: static;
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
-  }
-
-  .benefits-track::-webkit-scrollbar {
-    height: 0;
+    height: auto;
   }
 
   .benefits-track .feature-card {
     position: static;
-    width: auto;
-    flex: 0 0 85%;
-    scroll-snap-align: start;
+    width: 100%;
     transform: none;
     opacity: 1;
-    filter: none;
+    transition: none;
+    pointer-events: auto;
+    display: none; /* only show active */
   }
 
+  .benefits-track .feature-card.is-active {
+    display: flex;
+  }
+
+  /* Other layout */
   .signup { grid-template-columns: 1fr; }
 
   .footer-inner {
@@ -258,5 +399,4 @@ a { text-decoration: none; color: inherit; }
   }
 
   .footer-icons { justify-content: center; }
-  .nav-inner { gap: 14px; }
 }
