@@ -313,7 +313,25 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 960px) {
-  .features { grid-template-columns: 1fr; }
+  /* Mobile: swipeable carousel for benefits (no JS) */
+  .features {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .features::-webkit-scrollbar {
+    height: 0;
+  }
+
+  .feature-card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+
   .signup { grid-template-columns: 1fr; }
 
   .footer-inner {
