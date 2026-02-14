@@ -65,33 +65,43 @@
 
 
     <!-- ================= FEATURES ================= -->
-    <section class="section">
-      <div class="container features">
+    <section class="section" aria-label="Benefits">
+      <div class="container">
+        <div class="benefits-carousel" data-carousel>
+          <button class="carousel-btn carousel-btn--prev" type="button" aria-label="Previous benefit" data-prev>
+            ‹
+          </button>
 
-        <div class="feature-card">
-          <div class="feature-text">
-            <h3>Benefit/Feature 1</h3>
-            <p>Call out a feature, benefit, or value that can stand on its own.</p>
+          <div class="benefits-track" role="region" aria-label="Benefits carousel" aria-roledescription="carousel" tabindex="0" data-track>
+            <div class="feature-card" data-slide>
+              <div class="feature-text">
+                <h3>Benefit/Feature 1</h3>
+                <p>Call out a feature, benefit, or value that can stand on its own.</p>
+              </div>
+              <div class="feature-media" aria-hidden="true"></div>
+            </div>
+
+            <div class="feature-card" data-slide>
+              <div class="feature-text">
+                <h3>Benefit/Feature 2</h3>
+                <p>Call out a feature, benefit, or value that can stand on its own.</p>
+              </div>
+              <div class="feature-media" aria-hidden="true"></div>
+            </div>
+
+            <div class="feature-card" data-slide>
+              <div class="feature-text">
+                <h3>Benefit/Feature 3</h3>
+                <p>Call out a feature, benefit, or value that can stand on its own.</p>
+              </div>
+              <div class="feature-media" aria-hidden="true"></div>
+            </div>
           </div>
-          <div class="feature-media" aria-hidden="true"></div>
-        </div>
 
-        <div class="feature-card">
-          <div class="feature-text">
-            <h3>Benefit/Feature 2</h3>
-            <p>Call out a feature, benefit, or value that can stand on its own.</p>
-          </div>
-          <div class="feature-media" aria-hidden="true"></div>
+          <button class="carousel-btn carousel-btn--next" type="button" aria-label="Next benefit" data-next>
+            ›
+          </button>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-text">
-            <h3>Benefit/Feature 3</h3>
-            <p>Call out a feature, benefit, or value that can stand on its own.</p>
-          </div>
-          <div class="feature-media" aria-hidden="true"></div>
-        </div>
-
       </div>
     </section>
 
@@ -147,6 +157,58 @@
 
       </div>
     </footer>
+
+    <script>
+      (function () {
+        const carousel = document.querySelector('[data-carousel]');
+        if (!carousel) return;
+
+        const track = carousel.querySelector('[data-track]');
+        const slides = Array.from(carousel.querySelectorAll('[data-slide]'));
+        const prevBtn = carousel.querySelector('[data-prev]');
+        const nextBtn = carousel.querySelector('[data-next]');
+
+        let index = 0;
+
+        function clamp(n, min, max) {
+          return Math.max(min, Math.min(max, n));
+        }
+
+        function render() {
+          slides.forEach((slide, i) => {
+            const offset = i - index; // -2, -1, 0, 1, 2...
+            slide.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden');
+
+            if (offset === 0) slide.classList.add('is-active');
+            else if (offset === -1) slide.classList.add('is-prev');
+            else if (offset === 1) slide.classList.add('is-next');
+            else slide.classList.add('is-hidden');
+
+            slide.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
+          });
+
+          prevBtn.disabled = index === 0;
+          nextBtn.disabled = index === slides.length - 1;
+        }
+
+        function go(delta) {
+          index = clamp(index + delta, 0, slides.length - 1);
+          render();
+        }
+
+        prevBtn.addEventListener('click', () => go(-1));
+        nextBtn.addEventListener('click', () => go(1));
+
+        // Keyboard support on the carousel region
+        track.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+          if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        });
+
+        // Initial
+        render();
+      })();
+    </script>
 
   </body>
 </html>
