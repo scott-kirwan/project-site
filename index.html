@@ -3,166 +3,6 @@
   <head>
     <!-- Google Tag Manager -->
     <script>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-WXM4BDT8');
-    </script>
-    <!-- End Google Tag Manager -->
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Project Prototype</title>
-
-    <!-- Inter font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-
-  <body>
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WXM4BDT8"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-
-    <!-- ================= NAV ================= -->
-    <header class="nav">
-      <div class="container nav-inner">
-        <a class="logo" href="#">
-          <img src="images/logo.png" alt="Rulya logo" class="logo-img">
-        </a>
-
-        <div class="nav-right">
-          <a href="#" class="btn btn-primary btn-small">Sign up</a>
-        </div>
-      </div>
-    </header>
-
-
-    <!-- ================= HERO ================= -->
-    <section class="hero" aria-label="Hero">
-      <div class="container hero-content">
-        <h1>BA bold headline<br>that delivers</h1>
-
-        <div class="hero-buttons">
-          <a href="#" class="btn btn-primary">Call to action</a>
-          <a href="#" class="btn btn-secondary">Secondary</a>
-        </div>
-
-        <div class="device-frame" aria-hidden="true">
-          <div class="device-placeholder"></div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ================= FEATURES ================= -->
-    <section class="section" aria-label="Benefits">
-      <div class="container">
-        <div class="benefits-carousel" data-carousel>
-          <button class="carousel-btn carousel-btn--prev" type="button" aria-label="Previous benefit" data-prev>
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-
-          <div class="benefits-track" role="region" aria-label="Benefits carousel" aria-roledescription="carousel" tabindex="0" data-track>
-            <div class="feature-card" data-slide>
-              <div class="feature-text">
-                <h3>Benefit/Feature 1</h3>
-                <p>Call out a feature, benefit, or value that can stand on its own.</p>
-              </div>
-              <div class="feature-media" aria-hidden="true"></div>
-            </div>
-
-            <div class="feature-card" data-slide>
-              <div class="feature-text">
-                <h3>Benefit/Feature 2</h3>
-                <p>Call out a feature, benefit, or value that can stand on its own.</p>
-              </div>
-              <div class="feature-media" aria-hidden="true"></div>
-            </div>
-
-            <div class="feature-card" data-slide>
-              <div class="feature-text">
-                <h3>Benefit/Feature 3</h3>
-                <p>Call out a feature, benefit, or value that can stand on its own.</p>
-              </div>
-              <div class="feature-media" aria-hidden="true"></div>
-            </div>
-          </div>
-
-          <button class="carousel-btn carousel-btn--next" type="button" aria-label="Next benefit" data-next>
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ================= SIGNUP ================= -->
-    <section class="section section-ice">
-      <div class="container signup">
-
-        <div class="signup-left">
-          <h2>Email Signup<br>heading</h2>
-          <p>Some text</p>
-
-          <div class="input-placeholder" aria-hidden="true"></div>
-
-          <a href="#" class="btn btn-primary">Sign up →</a>
-        </div>
-
-        <div class="signup-right" aria-hidden="true"></div>
-
-      </div>
-    </section>
-
-
-    <!-- ================= FOOTER ================= -->
-    <footer class="footer">
-      <div class="container footer-inner">
-
-        <a class="logo" href="#">
-          <img src="images/logo.png" alt="Rulya logo" class="logo-img">
-        </a>
-
-        <div class="footer-links">
-          <a href="#">Additional menu item</a>
-          <a href="#">Additional menu item</a>
-          <a href="#">Additional menu item</a>
-        </div>
-
-        <div class="footer-icons" aria-label="Social links">
-          
-          <a class="icon" href="#" aria-label="Instagram">
-            <img src="images/instagram.png" alt="Instagram">
-          </a>
-
-          <a class="icon" href="#" aria-label="LinkedIn">
-            <img src="images/linkedin.png" alt="LinkedIn">
-          </a>
-
-          <a class="icon" href="#" aria-label="TikTok">
-            <img src="images/tiktok.png" alt="TikTok">
-          </a>
-
-        </div>
-
-      </div>
-    </footer>
-
-    <script>
       (function () {
         const carousel = document.querySelector('[data-carousel]');
         if (!carousel) return;
@@ -171,26 +11,35 @@
         const slides = Array.from(carousel.querySelectorAll('[data-slide]'));
         const prevBtn = carousel.querySelector('[data-prev]');
         const nextBtn = carousel.querySelector('[data-next]');
+        const tabs = Array.from(carousel.querySelectorAll('[data-tab]'));
+        const mq = window.matchMedia('(max-width: 960px)');
 
         let index = 0;
-        const mq = window.matchMedia('(max-width: 960px)');
 
         function mod(n, m) {
           return ((n % m) + m) % m;
         }
 
-        function setMobileMode() {
-          // Mobile uses native horizontal scroll (no JS states)
-          slides.forEach((slide) => {
-            slide.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden');
-            slide.removeAttribute('aria-hidden');
+        function setActiveTab(i) {
+          tabs.forEach((t, ti) => {
+            const active = ti === i;
+            t.classList.toggle('is-active', active);
+            t.setAttribute('aria-selected', active ? 'true' : 'false');
           });
-          track.style.height = '';
+        }
+
+        function renderMobile(i) {
+          index = i;
+          slides.forEach((slide, si) => {
+            slide.classList.toggle('is-active', si === index);
+            slide.setAttribute('aria-hidden', si === index ? 'false' : 'true');
+          });
+          setActiveTab(index);
+          track.style.height = ''; // natural flow on mobile
         }
 
         function renderDesktop() {
           slides.forEach((slide, i) => {
-            // distance around a loop (-1,0,1) with wrap support
             const raw = i - index;
             const wrapped = raw > slides.length / 2 ? raw - slides.length : raw;
             const offset = wrapped < -slides.length / 2 ? wrapped + slides.length : wrapped;
@@ -205,26 +54,31 @@
             slide.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
           });
 
-          // Sync track height to the active slide (arrows center on full card)
+          // Keep arrows centered on the full card
           const active = slides[index];
           if (active) track.style.height = active.offsetHeight + 'px';
         }
 
         function render() {
-          if (mq.matches) return setMobileMode();
+          if (mq.matches) return renderMobile(index);
           return renderDesktop();
         }
 
         function go(delta) {
-          if (mq.matches) return; // ignore on mobile
+          if (mq.matches) {
+            // mobile tab behaviour
+            renderMobile(mod(index + delta, slides.length));
+            return;
+          }
           index = mod(index + delta, slides.length);
           renderDesktop();
         }
 
+        // Arrow buttons (desktop)
         prevBtn.addEventListener('click', (e) => { e.preventDefault(); go(-1); });
         nextBtn.addEventListener('click', (e) => { e.preventDefault(); go(1); });
 
-        // Optional: click the peeking cards to move (desktop only)
+        // Click peeking cards (desktop)
         slides.forEach((slide) => {
           slide.addEventListener('click', () => {
             if (mq.matches) return;
@@ -233,16 +87,23 @@
           });
         });
 
-        // Keyboard support (desktop only)
+        // Keyboard (desktop)
         track.addEventListener('keydown', (e) => {
           if (mq.matches) return;
           if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
           if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
         });
 
-        // Re-render on breakpoint change + resize
+        // Tabs (mobile)
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const i = Number(tab.getAttribute('data-tab'));
+            renderMobile(i);
+          });
+        });
+
         mq.addEventListener('change', () => {
-          // reset index so it doesn't feel broken when switching modes
+          // reset visuals when switching modes
           index = 0;
           render();
         });
