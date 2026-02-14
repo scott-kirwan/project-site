@@ -308,37 +308,58 @@ a { text-decoration: none; color: inherit; }
 /* ===== FOOTER ===== */
 .footer {
   border-top: 1px solid var(--border);
-  padding: 30px 0;
+  padding: 40px 0;
   background: var(--white);
 }
 
-.footer-inner {
+.footer-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.footer-col--right {
+  align-items: flex-end;
+}
+
+.footer-brand {
+  display: inline-flex;
+}
+
+.footer-heading {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(22, 30, 84, 0.85);
 }
 
 .footer-links {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  font-size: 12px;
-  opacity: 0.9;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+  opacity: 0.95;
 }
 
 .footer-links a:hover { color: var(--coral); }
 
 .footer-icons {
   display: flex;
-  justify-content: flex-end;
   gap: 10px;
 }
 
 .icon {
   width: 32px;
   height: 32px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
@@ -358,6 +379,62 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 960px) {
+  .container { padding: 0 24px; }
+
+  /* Benefits: show tabs + one stacked card */
+  .benefits-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .tab {
+    border: 1px solid rgba(22, 30, 84, 0.18);
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--midnight);
+    padding: 10px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .tab.is-active {
+    background: rgba(255, 152, 106, 0.22);
+    border-color: rgba(255, 152, 106, 0.65);
+  }
+
+  .carousel-btn { display: none; }
+
+  .benefits-track {
+    position: static;
+    height: auto;
+    width: 100%;
+  }
+
+  .benefits-track .feature-card {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    transition: none;
+    display: none; /* only show active */
+  }
+
+  .benefits-track .feature-card.is-active { display: flex; }
+
+  /* Signup */
+  .signup { grid-template-columns: 1fr; }
+
+  /* Footer: keep 2 columns but tighten spacing */
+  .footer { padding: 32px 0; }
+  .footer-grid { gap: 20px; }
+  .footer-col--right { align-items: flex-end; }
+}
+
   .container { padding: 0 24px; }
 
   /* Benefits: show tabs + one stacked card */
@@ -442,7 +519,4 @@ a { text-decoration: none; color: inherit; }
     gap: 10px;
     text-align: center;
   }
-}
-
-
 }
