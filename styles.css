@@ -1,42 +1,32 @@
-/* =========================
-   ROOT VARIABLES
-========================= */
 :root {
-  --container-width: 1152px;
+  /* Palette */
+  --ice: #BBE0EF;        /* hero / section background */
+  --midnight: #161E54;   /* headline / titles / body copy */
+  --orange: #F16D34;     /* CTA */
+  --coral: #FF986A;      /* hover / icon / subtle UI frames */
+  --white: #FFFFFF;      /* CTA text */
 
+  /* Layout */
+  --container-width: 1152px;
   --radius-lg: 28px;
   --radius-md: 20px;
   --radius-sm: 14px;
-
-  --text-dark: #111;
-  --text-light: #ffffff;
-
-  --bg-light: #f3f4f6;
-  --border: rgba(0, 0, 0, 0.08);
+  --border: rgba(22, 30, 84, 0.12);
 }
 
-/* =========================
-   RESET
-========================= */
-* {
-  box-sizing: border-box;
-}
+/* ===== RESET ===== */
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  color: var(--text-dark);
-  background: #ffffff;
+  color: var(--midnight);
+  background: var(--white);
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+a { text-decoration: none; color: inherit; }
 
-/* =========================
-   LAYOUT
-========================= */
+/* ===== LAYOUT ===== */
 .container {
   width: min(var(--container-width), 92%);
   margin: 0 auto;
@@ -46,12 +36,15 @@ a {
   padding: 60px 0;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+.section-ice {
+  background: var(--ice);
+}
+
+/* ===== NAV ===== */
 .nav {
   padding: 20px 0;
   border-bottom: 1px solid var(--border);
+  background: var(--white);
 }
 
 .nav-inner {
@@ -70,8 +63,8 @@ a {
 .logo-mark {
   width: 22px;
   height: 22px;
-  background: #cccccc;
   border-radius: 6px;
+  background: var(--coral);
 }
 
 .nav-right {
@@ -82,12 +75,15 @@ a {
 
 .nav-link {
   font-size: 14px;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+.nav-link:hover {
+  opacity: 1;
+  color: var(--coral);
+}
+
+/* ===== BUTTONS ===== */
 .btn {
   padding: 12px 18px;
   border-radius: var(--radius-sm);
@@ -95,25 +91,15 @@ a {
   font-size: 14px;
   display: inline-block;
   transition: 0.15s ease;
+  border: 1px solid transparent;
 }
 
 .btn:hover {
-  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
-.btn-dark {
-  background: #000000;
-  color: #ffffff;
-}
-
-.btn-light {
-  background: #ffffff;
-  color: #000000;
-}
-
-.btn-outline {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #ffffff;
+.btn:active {
+  transform: translateY(0);
 }
 
 .btn-small {
@@ -121,25 +107,36 @@ a {
   border-radius: 999px;
 }
 
-/* =========================
-   HERO
-========================= */
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--coral);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--midnight);
+  border-color: rgba(22, 30, 84, 0.25);
+}
+
+.btn-secondary:hover {
+  border-color: var(--coral);
+  color: var(--coral);
+}
+
+/* ===== HERO ===== */
 .hero {
   position: relative;
   padding: 100px 0 80px;
   overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #4c6ef5, #15aabf);
+  background: var(--ice);
 }
 
 .hero-content {
-  position: relative;
   text-align: center;
-  color: var(--text-light);
 }
 
 .hero h1 {
@@ -147,6 +144,7 @@ a {
   line-height: 1.05;
   margin-bottom: 24px;
   font-weight: 800;
+  color: var(--midnight);
 }
 
 .hero-buttons {
@@ -163,19 +161,18 @@ a {
   margin: 0 auto;
   padding: 12px;
   border-radius: var(--radius-lg);
-  border: 8px solid #ffffff;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(22, 30, 84, 0.12);
+  box-shadow: 0 10px 40px rgba(22, 30, 84, 0.12);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .device-placeholder {
   height: 480px;
   border-radius: var(--radius-md);
-  background: #dddddd;
+  background: rgba(22, 30, 84, 0.12);
 }
 
-/* =========================
-   FEATURES
-========================= */
+/* ===== FEATURES ===== */
 .features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -183,7 +180,8 @@ a {
 }
 
 .feature-card {
-  background: var(--bg-light);
+  background: rgba(187, 224, 239, 0.35);
+  border: 1px solid rgba(22, 30, 84, 0.10);
   border-radius: var(--radius-lg);
   padding: 20px;
   display: flex;
@@ -194,23 +192,24 @@ a {
 .feature-text h3 {
   margin: 0 0 8px;
   font-size: 14px;
+  color: var(--midnight);
 }
 
 .feature-text p {
   margin: 0;
   font-size: 13px;
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
 .feature-media {
   height: 160px;
-  background: #cccccc;
+  background: rgba(22, 30, 84, 0.10);
   border-radius: var(--radius-md);
+  outline: 2px solid rgba(255, 152, 106, 0.35);
+  outline-offset: 0;
 }
 
-/* =========================
-   SIGNUP SECTION
-========================= */
+/* ===== SIGNUP ===== */
 .signup {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -221,33 +220,36 @@ a {
 .signup-left h2 {
   font-size: 36px;
   margin-bottom: 12px;
+  color: var(--midnight);
 }
 
 .signup-left p {
-  opacity: 0.7;
+  opacity: 0.85;
   margin-bottom: 20px;
 }
 
 .input-placeholder {
   height: 16px;
   width: 240px;
-  background: #cccccc;
+  background: rgba(22, 30, 84, 0.14);
   border-radius: 6px;
   margin-bottom: 20px;
+  outline: 2px solid rgba(255, 152, 106, 0.35);
+  outline-offset: 0;
 }
 
 .signup-right {
   height: 260px;
-  background: #dddddd;
+  background: rgba(22, 30, 84, 0.12);
   border-radius: var(--radius-lg);
+  outline: 2px solid rgba(255, 152, 106, 0.35);
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* ===== FOOTER ===== */
 .footer {
   border-top: 1px solid var(--border);
   padding: 30px 0;
+  background: var(--white);
 }
 
 .footer-inner {
@@ -262,7 +264,11 @@ a {
   justify-content: center;
   gap: 20px;
   font-size: 12px;
-  opacity: 0.7;
+  opacity: 0.9;
+}
+
+.footer-links a:hover {
+  color: var(--coral);
 }
 
 .footer-icons {
@@ -274,30 +280,25 @@ a {
 .icon {
   width: 28px;
   height: 28px;
-  background: #dddddd;
   border-radius: 8px;
+  background: rgba(255, 152, 106, 0.35);
+  border: 1px solid rgba(255, 152, 106, 0.65);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.icon:hover {
+  background: var(--coral);
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 960px) {
-
-  .features {
-    grid-template-columns: 1fr;
-  }
-
-  .signup {
-    grid-template-columns: 1fr;
-  }
+  .features { grid-template-columns: 1fr; }
+  .signup { grid-template-columns: 1fr; }
 
   .footer-inner {
     grid-template-columns: 1fr;
     text-align: center;
   }
 
-  .footer-icons {
-    justify-content: center;
-  }
+  .footer-icons { justify-content: center; }
+  .nav-inner { gap: 14px; }
 }
-
