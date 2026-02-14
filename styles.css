@@ -412,9 +412,34 @@ a { text-decoration: none; color: inherit; }
 
   /* Footer */
   .footer-inner {
-    grid-template-columns: 1fr;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
   }
 
-  .footer-icons { justify-content: center; }
+  /* Row 1: logo left, icons right */
+  .footer-inner .logo {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .footer-icons {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
+  }
+
+  /* Row 2: stacked menu items full width */
+  .footer-links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
 }
