@@ -246,7 +246,7 @@ a { text-decoration: none; color: inherit; }
 
   .benefits-track {
     position: relative;
-    height: 360px;
+    height: auto; /* allow height to match active card */
     overflow: visible;
   }
 
