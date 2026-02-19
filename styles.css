@@ -379,10 +379,17 @@ a { text-decoration: none; color: inherit; }
 
 .personas-carousel {
   position: relative;
-  overflow: hidden; /* hides off-screen cards */
+  /* Allow the active card scale to remain fully visible vertically,
+     but still clip horizontally for the peek effect */
+  overflow-x: hidden;
+  overflow-y: visible;
+
   width: 100vw;
   margin-left: 50%;
   transform: translateX(-50%);
+
+  /* breathing room so scaled card isn't clipped top/bottom */
+  padding: 22px 0;
 }
 
 /* Track is translated left/right to move cards */
@@ -430,31 +437,34 @@ a { text-decoration: none; color: inherit; }
   padding: 14px;
 }
 
-/* Image placeholders (swap to real images later) */
+/* Image placeholders (using hero image for now) */
 .persona-img {
   width: 100%;
   border-radius: var(--radius-md);
-  background: rgba(22, 30, 84, 0.08);
-  border: 2px dashed rgba(22, 30, 84, 0.22);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  background-image: url("images/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  outline: 1px solid rgba(22, 30, 84, 0.12);
+  overflow: hidden;
+  position: relative;
 }
 
-/* Active card: top image takes MORE vertical space + subtle zoom feel */
-.persona-img--top { height: 380px; }
-.persona-img--bottom { height: 220px; }
-
-.persona-card.is-active .persona-img--top { height: 440px; }
-.persona-card.is-active .persona-img--bottom { height: 200px; }
-
+/* Optional label so you can still tell top vs bottom */
 .persona-img-label {
-  font-size: 12px;
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(22, 30, 84, 0.55);
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(22, 30, 84, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 6px 10px;
+  backdrop-filter: blur(6px);
 }
 
 /* Overlay only appears on the active card (JS controls) */
