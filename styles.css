@@ -133,7 +133,7 @@ a { text-decoration: none; color: inherit; }
   position: absolute;
   inset: 0;
   background: var(--ice);
-  opacity: 0.50; /* matches previous 0.22 image opacity effect */
+  opacity: 0.20; /* matches previous 0.22 image opacity effect */
   pointer-events: none;
   z-index: 1;
 }
