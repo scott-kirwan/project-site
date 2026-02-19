@@ -283,14 +283,14 @@ a { text-decoration: none; color: inherit; }
 
 /* Full-bleed background (shell goes edge-to-edge) */
 .benefits-inner {
-  width: 100vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 .benefits-shell {
   position: relative;
-  width: 100vw;
+  width: 100%;
   border-radius: 0;           /* full width background */
   overflow: hidden;
   border-top: 1px solid rgba(22, 30, 84, 0.10);
@@ -864,66 +864,13 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 960px) {
   .container { padding: 0 24px; }
 
-  /* Benefits */
-  .benefits-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 14px;
-  }
-
-  .tab {
-    border: 1px solid rgba(22, 30, 84, 0.18);
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--midnight);
-    padding: 10px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .tab.is-active {
-    background: rgba(255, 152, 106, 0.22);
-    border-color: rgba(255, 152, 106, 0.65);
-  }
-
-  .carousel-btn { display: none; }
-
-  .benefits-track {
-    position: static;
-    height: auto;
-    width: 100%;
-  }
-
-  .benefits-track .feature-card {
-    position: static;
-    width: 100%;
-    max-width: 100%;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
-    transition: none;
-    display: none;
-  }
-
-  .benefits-track .feature-card.is-active { display: flex; }
-
-    /* Signup */
+  /* Signup */
   .signup { grid-template-columns: 1fr; }
 
-  .waitlist-row {
-    grid-template-columns: 1fr;
-  }
+  .waitlist-row { grid-template-columns: 1fr; }
+  .waitlist-row .btn { width: 100%; text-align: center; }
 
-  .waitlist-row .btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .signup-visual {
-    height: 220px;
-  }
+  .signup-visual { height: 220px; }
 }
 
 @media (min-width: 961px) {
