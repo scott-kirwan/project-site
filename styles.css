@@ -125,6 +125,17 @@ a { text-decoration: none; color: inherit; }
   object-fit: cover;
   object-position: center;
   pointer-events: none;
+  z-index: 0;
+}
+
+/* Blue overlay over video (replicates previous image opacity look) */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--ice);
+  opacity: 0.78; /* matches previous 0.22 image opacity effect */
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Fallback: if video can't play, the poster (images/hero-bg.jpg) will show */
