@@ -51,26 +51,6 @@ a { text-decoration: none; color: inherit; }
   background: var(--ice);
 }
 
-/* ===== NAV ===== */
-.nav {
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border);
-  background: var(--white);
-}
-
-.nav-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 14px;
-}
-
-.logo-img {
-  height: 32px;
-  width: auto;
-  display: block;
-}
-
 /* ===== BUTTONS ===== */
 .btn {
   padding: 12px 18px;
@@ -131,6 +111,24 @@ a { text-decoration: none; color: inherit; }
   background-repeat: no-repeat;
   opacity: 0.22; /* keeps text readable on ice background */
   pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.hero-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.hero-logo img {
+  width: min(220px, 60vw);
+  height: auto;
+  display: block;
 }
 
 .hero-content {
@@ -459,22 +457,6 @@ a { text-decoration: none; color: inherit; }
 
 /* Hide any leftover labels (legacy) */
 .persona-img-label { display: none !important; }
-
-.persona-img-label {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
-  background: rgba(22, 30, 84, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  padding: 6px 10px;
-  backdrop-filter: blur(6px);
-}
 
 /* Overlay only appears on the active card (JS controls) */
 .persona-overlay {
