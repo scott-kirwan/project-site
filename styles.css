@@ -420,7 +420,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== PERSONAS (CAROUSEL) ===== */
 .personas {
-  padding: 80px 0;
+  padding: 72px 0;
 }
 
 .personas-inner {
@@ -429,22 +429,23 @@ a { text-decoration: none; color: inherit; }
 
 .personas-carousel {
   position: relative;
-  min-height: 86vh; /* almost full screen */
+  min-height: 78vh;
   display: flex;
   align-items: center;
-  padding: 0 64px;
-  overflow: hidden; /* creates the partial off-screen look */
+  overflow: hidden;
 }
 
+/* We position the 3 visible cards (left/active/right) absolutely,
+   so the middle is always centered and sides "peek" off-screen. */
 .personas-track {
-  display: flex;
-  gap: 24px;
-  width: auto;
-  transform: translateX(0);
+  position: relative;
+  width: 100%;
+  /* enough height for top+bottom images + overlay */
+  height: 760px;
 }
 
 .personas-track.is-shifting {
-  transition: transform 900ms cubic-bezier(0.22, 0.65, 0.3, 1);
+  transition: none; /* movement handled visually by class swaps */
 }
 
 .personas-track.is-jump {
@@ -452,11 +453,41 @@ a { text-decoration: none; color: inherit; }
 }
 
 .persona-card {
-  flex: 0 0 45%; /* > 33% so left/right peek off-screen */
-  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(780px, 86vw);
   border-radius: var(--radius-lg);
-  position: relative;
   overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(0.9);
+  transition: transform 700ms cubic-bezier(0.22, 0.65, 0.3, 1), opacity 350ms ease;
+}
+
+.persona-card.is-active,
+.persona-card.is-left,
+.persona-card.is-right {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.persona-card.is-active {
+  transform: translateX(-50%) scale(1);
+  z-index: 3;
+}
+
+/* Side cards start right beside the middle, but are pushed off-screen */
+.persona-card.is-left {
+  transform: translateX(calc(-50% - 58vw)) scale(0.92);
+  z-index: 2;
+  opacity: 0.85;
+}
+
+.persona-card.is-right {
+  transform: translateX(calc(-50% + 58vw)) scale(0.92);
+  z-index: 2;
+  opacity: 0.85;
 }
 
 .persona-stack {
@@ -477,7 +508,7 @@ a { text-decoration: none; color: inherit; }
 .persona-img--top {
   height: 420px;
   transform: scale(1);
-  transition: transform 900ms cubic-bezier(0.22, 0.65, 0.3, 1), height 900ms cubic-bezier(0.22, 0.65, 0.3, 1);
+  transition: transform 700ms cubic-bezier(0.22, 0.65, 0.3, 1), height 700ms cubic-bezier(0.22, 0.65, 0.3, 1);
 }
 
 .persona-img--bottom {
@@ -488,19 +519,6 @@ a { text-decoration: none; color: inherit; }
 .persona-card.is-active .persona-img--top {
   height: 480px;
   transform: scale(1.06);
-}
-
-/* Side cards partially visible feel */
-.persona-card.is-left,
-.persona-card.is-right {
-  opacity: 0.8;
-  transform: scale(0.94);
-  transition: transform 900ms cubic-bezier(0.22, 0.65, 0.3, 1), opacity 900ms ease;
-}
-
-.persona-card.is-active {
-  opacity: 1;
-  transform: scale(1);
 }
 
 /* Overlay content (only on active card; injected via JS) */
@@ -520,7 +538,7 @@ a { text-decoration: none; color: inherit; }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(22,30,84,0) 30%, rgba(22,30,84,0.82) 100%);
+  background: linear-gradient(180deg, rgba(22,30,84,0) 32%, rgba(22,30,84,0.86) 100%);
 }
 
 .persona-overlay > * {
@@ -568,13 +586,29 @@ a { text-decoration: none; color: inherit; }
   margin-top: 8px;
 }
 
-
-
 /* ===== MOBILE ===== */
 @media (max-width: 960px) {
-  .personas-carousel { padding: 0 18px; min-height: 78vh; }
+  .personas { padding: 56px 0; }
 
-  .personas-track { gap: 16px; }
+  .personas-carousel {
+    min-height: 70vh;
+  }
+
+  .personas-track {
+    height: 640px;
+  }
+
+  .persona-card {
+    width: min(560px, 92vw);
+  }
+
+  .persona-card.is-left {
+    transform: translateX(calc(-50% - 70vw)) scale(0.92);
+  }
+
+  .persona-card.is-right {
+    transform: translateX(calc(-50% + 70vw)) scale(0.92);
+  }
 
   .persona-img--top { height: 320px; }
   .persona-card.is-active .persona-img--top { height: 360px; }
@@ -582,8 +616,6 @@ a { text-decoration: none; color: inherit; }
 
   .persona-overlay { padding: 18px; }
   .persona-trigger { font-size: 12px; padding: 9px 10px; }
-
-  .persona-arrow { width: 44px; height: 44px; }
 }
 
 /* ===== SIGNUP ===== */
