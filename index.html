@@ -1,794 +1,485 @@
-@font-face {
-  font-family: 'ZT Otez';
-  src: url('fonts/zt-otez.regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-:root {
-  /* Palette */
-  --ice: #BBE0EF;        /* hero / section background */
-  --midnight: #161E54;   /* headline / titles / body copy */
-  --orange: #F16D34;     /* CTA */
-  --coral: #FF986A;      /* hover / icon / subtle UI frames */
-  --white: #FFFFFF;      /* CTA text */
-
-  /* Layout */
-  --container-width: 1152px;
-  --radius-lg: 28px;
-  --radius-md: 20px;
-  --radius-sm: 14px;
-  --border: rgba(22, 30, 84, 0.12);
-}
-
-/* ===== RESET ===== */
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  color: var(--midnight);
-  background: var(--white);
-  scroll-behavior: smooth;
-}
-
-a { text-decoration: none; color: inherit; }
-
-/* ===== LAYOUT ===== */
-.container {
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 48px;
-}
-
-.section {
-  padding: 60px 0;
-  background: var(--white);
-}
-
-.section-ice {
-  background: var(--ice);
-}
-
-/* ===== BUTTONS ===== */
-.btn {
-  padding: 12px 18px;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  font-size: 14px;
-  display: inline-block;
-  transition: 0.15s ease;
-  border: 1px solid transparent;
-}
-
-.btn:hover { transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
-
-.btn-small {
-  padding: 8px 14px;
-  border-radius: 999px;
-}
-
-.btn-primary {
-  background: var(--orange);
-  color: var(--white);
-  height: 48px; /* match input height for visual balance */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 22px;
-}
-
-.btn-primary:hover { background: var(--coral); }
-
-.btn-secondary {
-  background: transparent;
-  color: var(--midnight);
-  border-color: rgba(22, 30, 84, 0.25);
-}
-
-.btn-secondary:hover {
-  border-color: var(--coral);
-  color: var(--coral);
-}
-
-/* ===== HERO ===== */
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: 100px 0 80px;
-  background: var(--ice); /* fallback if image/video not loaded */
-}
-
-/* Background image layer (can be replaced with a <video> later) */
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url("images/hero-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.22; /* keeps text readable on ice background */
-  pointer-events: none;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-
-/* Logo positioned top-left inside hero */
-.hero-logo {
-  position: absolute;
-  top: 28px;
-  left: 48px;
-  margin: 0;
-}
-
-.hero-logo img {
-  width: 140px; /* smaller logo */
-  height: auto;
-  display: block;
-}
-
-.hero-logo {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 22px;
-}
-
-.hero-logo img {
-  width: min(220px, 60vw);
-  height: auto;
-  display: block;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-
-.hero-content { text-align: center; }
-
-.hero h1 {
-  font-family: 'ZT Otez', 'Inter', sans-serif;
-  font-size: clamp(36px, 5vw, 64px);
-  line-height: 1.05;
-  margin: 0 0 24px;
-  font-weight: 400; /* ZT Otez only has regular */
-  color: var(--midnight);
-}
-
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.hero-subtext {
-  font-size: 18px;
-  opacity: 0.85;
-  margin: 0 0 36px; /* more space before CTA */
-}
-
-.hero-secondary {
-  margin: 8px 0 60px;
-  font-size: 14px;
-}
-
-.hero-secondary a {
-  color: var(--midnight);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.hero-secondary a:hover {
-  color: var(--coral);
-}
-
-.device-frame {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 12px;
-  border-radius: var(--radius-lg);
-  border: 2px solid rgba(22, 30, 84, 0.12);
-  box-shadow: 0 10px 40px rgba(22, 30, 84, 0.12);
-  background: rgba(255, 255, 255, 0.4);
-}
-
-.device-placeholder {
-  height: 480px;
-  border-radius: var(--radius-md);
-  background: rgba(22, 30, 84, 0.12);
-}
-
-/* ===== BENEFITS (Future.co-style) ===== */
-.benefits {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-
-/* Slightly shorter overall section height */
-.benefits { padding: 48px 0; }
-
-.benefits-inner {
-  position: relative;
-}
-
-/* One unified shell that contains BOTH left + right */
-.benefits-shell {
-  position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1px solid rgba(22, 30, 84, 0.10);
-  background: rgba(255, 255, 255, 0.60);
-  box-shadow: 0 16px 60px rgba(22, 30, 84, 0.12);
-  padding: 32px;
-}
-
-/* Blurred background sits INSIDE the shell */
-.benefits-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url("images/hero-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  filter: blur(14px);
-  transform: scale(1.10);
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.benefits-layout {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 44px;
-  align-items: center;
-}
-
-/* Left panel is now "floating content" inside the shared shell */
-.benefits-left {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-}
-
-.benefits-eyebrow {
-  margin: 0 0 16px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(22, 30, 84, 0.70);
-}
-
-.benefits-tabs {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.tab {
-  width: 100%;
-  text-align: left;
-  border: 1px solid rgba(22, 30, 84, 0.14);
-  background: rgba(255, 255, 255, 0.70);
-  color: var(--midnight);
-  padding: 16px 16px;
-  border-radius: 18px;
-  cursor: pointer;
-  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
-}
-
-.tab:hover {
-  transform: translateY(-1px);
-  border-color: rgba(255, 152, 106, 0.55);
-}
-
-.tab-title {
-  display: block;
-  font-family: 'ZT Otez', 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.1;
-  margin-bottom: 6px;
-}
-
-.tab-sub {
-  display: block;
-  font-size: 14px;
-  opacity: 0.78;
-  line-height: 1.35;
-}
-
-.tab.is-active {
-  background: rgba(22, 30, 84, 0.10);
-  border-color: rgba(22, 30, 84, 0.22);
-}
-
-.benefits-cta {
-  margin-top: 18px;
-}
-
-.benefits-right {
-  display: flex;
-  justify-content: center;
-}
-
-.benefits-media {
-  width: min(520px, 100%);
-  position: relative;
-}
-
-/* Mobile-only CTA overlay */
-.benefits-media-cta {
-  display: none;
-}
-
-.benefits-media .feature-card {
-  display: none;
-  background: rgba(0,0,0,0.22);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 36px;
-  padding: 22px;
-  color: var(--white);
-  box-shadow: 0 18px 60px rgba(22, 30, 84, 0.25);
-  backdrop-filter: blur(6px);
-}
-
-.benefits-media .feature-card.is-active {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.benefits-media .feature-text h3 {
-  color: var(--white);
-  font-size: 32px;
-  margin: 0 0 10px;
-}
-
-.benefits-media .feature-text p {
-  color: rgba(255,255,255,0.88);
-  font-size: 16px;
-  opacity: 1;
-}
-
-/* Vertical media placeholder (use hero image for now so you can see it working) */
-.benefits-media .feature-media {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  border-radius: 26px;
-  background-image: url("images/hero-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  outline: 1px solid rgba(255,255,255,0.20);
-  overflow: hidden;
-}
-
-
-/* ===== PERSONAS (peek carousel, looping) ===== */
-.personas {
-  padding: 64px 0;
-}
-
-/* Full-bleed personas (no container window) */
-.personas-inner {
-  width: 100%;
-  max-width: none;
-  padding: 0;
-}
-
-.personas-carousel {
-  position: relative;
-
-  /* Some browsers clip the other axis when mixing overflow-x/overflow-y.
-     Use overflow:hidden + padding so the scaled (active) card stays fully visible. */
-  overflow: hidden;
-
-  width: 100vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
-
-  /* breathing room so scaled card isn't clipped top/bottom */
-  padding: 36px 0;
-  box-sizing: border-box;
-}
-
-/* Track is translated left/right to move cards */
-.personas-track {
-  display: flex;
-  gap: 22px;
-  align-items: stretch;
-  will-change: transform;
-  transition: transform 900ms cubic-bezier(0.22, 0.65, 0.3, 1);
-}
-
-.personas-track.is-no-anim {
-  transition: none !important;
-}
-
-/* Card width gives you left/right peeks */
-.persona-card {
-  flex: 0 0 78vw;
-  max-width: 760px;
-  min-width: 320px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  position: relative;
-  background: rgba(255,255,255,0.35);
-  border: 1px solid rgba(22, 30, 84, 0.10);
-  box-shadow: 0 14px 44px rgba(22, 30, 84, 0.12);
-  transform: scale(0.985);
-  opacity: 0.92;
-  transition: transform 750ms cubic-bezier(0.22, 0.65, 0.3, 1), opacity 350ms ease;
-}
-
-/* Middle card is emphasized */
-.persona-card.is-active {
-  transform: scale(1.02);
-  opacity: 1;
-}
-
-.persona-stack {
-  width: 100%;
-  position: relative;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 14px;
-}
-
-/* Image placeholders (using hero image for now) */
-.persona-img {
-  width: 100%;
-  border-radius: var(--radius-md);
-  background-color: rgba(22, 30, 84, 0.08); /* fallback if image path is wrong */
-  background-image: url("images/hero-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  outline: 1px solid rgba(22, 30, 84, 0.12);
-  overflow: hidden;
-  position: relative;
-  display: block;
-}
-
-/* IMPORTANT: give the image boxes height on desktop too */
-.persona-img--top { height: 380px !important; min-height: 380px; }
-.persona-img--bottom { height: 220px !important; min-height: 220px; }
-
-/* Hide any leftover labels (legacy) */
-.persona-img-label { display: none !important; }
-
-/* Overlay only appears on the active card (JS controls) */
-.persona-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 22px;
-  gap: 10px;
-  color: var(--white);
-  pointer-events: none;
-  text-align: left;
-
-  /* Smooth fade-in synced with card zoom */
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 260ms ease, transform 260ms ease;
-}
-
-.persona-card.is-active .persona-overlay {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.persona-overlay::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(22,30,84,0) 34%, rgba(22,30,84,0.86) 100%);
-}
-
-.persona-overlay > * { position: relative; z-index: 1; }
-
-.persona-name {
-  margin: 0;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.9;
-}
-
-.persona-headline {
-  font-family: 'ZT Otez', 'Inter', sans-serif;
-  margin: 0;
-  font-size: clamp(20px, 2vw, 32px);
-  line-height: 1.08;
-  font-weight: 400;
-}
-
-.persona-sub {
-  margin: 0;
-  font-size: 14px;
-  opacity: 0.9;
-  max-width: 54ch;
-}
-
-.persona-trigger {
-  margin: 6px 0 0;
-  font-size: 13px;
-  opacity: 0.95;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 999px;
-  padding: 10px 12px;
-  width: fit-content;
-}
-
-.persona-overlay .btn {
-  pointer-events: auto;
-  width: fit-content;
-  margin-top: 8px;
-}
-
-@media (max-width: 960px) {
-  .personas { padding: 48px 0; }
-  .personas-track { gap: 14px; }
-  .persona-card { flex-basis: 86vw; }
-  .persona-img--top { height: 260px; }
-  .persona-img--bottom { height: 150px; }
-  .persona-card.is-active .persona-img--top { height: 300px; }
-  .persona-card.is-active .persona-img--bottom { height: 140px; }
-  .persona-overlay { padding: 16px; }
-  .persona-sub { display: none; }
-}
-
-/* ===== SIGNUP ===== */
-.signup {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.signup-left h2 {
-  font-family: 'ZT Otez', 'Inter', sans-serif;
-  font-size: 36px;
-  margin: 0 0 12px;
-  font-weight: 400; /* regular only */
-  color: var(--midnight);
-}
-
-.signup-subtext {
-  opacity: 0.85;
-  margin: 0 0 20px;
-}
-
-/* Accessible helper */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.waitlist-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.waitlist-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 18px;
-  align-items: center;
-}
-
-.waitlist-row input {
-  height: 48px;
-  width: 100%;
-  min-width: 0;
-  border-radius: 12px;
-  border: 1px solid rgba(22, 30, 84, 0.18);
-  padding: 0 16px;
-  font-size: 15px;
-  color: var(--midnight);
-  background: rgba(255, 255, 255, 0.9);
-  outline: none;
-}
-
-.waitlist-row input:focus {
-  border-color: rgba(241, 109, 52, 0.65);
-  box-shadow: 0 0 0 4px rgba(255, 152, 106, 0.25);
-}
-
-.waitlist-error {
-  margin: 6px 0 0;
-  font-size: 13px;
-  color: #b00020;
-}
-
-.waitlist-success {
-  margin: 6px 0 0;
-  font-size: 13px;
-  opacity: 0.9;
-}
-
-/* Right-side visual (upload later: images/signup-blur.jpg) */
-.signup-visual {
-  height: 260px;
-  border-radius: var(--radius-lg);
-  outline: 2px solid rgba(255, 152, 106, 0.35);
-  background: rgba(22, 30, 84, 0.12);
-  background-image: url("images/signup-blur.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-/* ===== FOOTER ===== */
-.footer {
-
-  border-top: 1px solid var(--border);
-  padding: 40px 0;
-  background: var(--white);
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 28px;
-}
-
-.footer-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.footer-heading {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(22, 30, 84, 0.85);
-}
-
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 13px;
-  opacity: 0.95;
-}
-
-.footer-links a:hover { color: var(--coral); }
-
-.footer-icons {
-  display: flex;
-  gap: 10px;
-}
-
-.icon {
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon img {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-  display: block;
-}
-
-.icon:hover img {
-  opacity: 0.7;
-  transform: scale(1.05);
-  transition: 0.15s ease;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 960px) {
-  .container { padding: 0 24px; }
-
-  /* Benefits */
-  .benefits-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 14px;
-  }
-
-  .tab {
-    border: 1px solid rgba(22, 30, 84, 0.18);
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--midnight);
-    padding: 10px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .tab.is-active {
-    background: rgba(255, 152, 106, 0.22);
-    border-color: rgba(255, 152, 106, 0.65);
-  }
-
-  .carousel-btn { display: none; }
-
-  .benefits-track {
-    position: static;
-    height: auto;
-    width: 100%;
-  }
-
-  .benefits-track .feature-card {
-    position: static;
-    width: 100%;
-    max-width: 100%;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
-    transition: none;
-    display: none;
-  }
-
-  .benefits-track .feature-card.is-active { display: flex; }
-
-    /* Signup */
-  .signup { grid-template-columns: 1fr; }
-
-  .waitlist-row {
-    grid-template-columns: 1fr;
-  }
-
-  .waitlist-row .btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .signup-visual {
-    height: 220px;
-  }
-}
-
-@media (min-width: 961px) {
-  .footer-grid {
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-  }
-
-  .footer-col--links {
-    grid-column: 1;
-  }
-
-  .footer-col--social {
-    grid-column: 3;
-    align-items: flex-end;
-  }
-}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WXM4BDT8');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Rulya team sports finder</title>
+
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WXM4BDT8"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" aria-label="Hero">
+      <!-- Background image (swap to video later) -->
+      <div class="hero-bg" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <div class="hero-logo" aria-label="Rulya logo">
+          <img src="images/logo.png" alt="Rulya" />
+        </div>
+        <h1>Don’t text 10 people.<br>Just book a game.</h1>
+
+        <p class="hero-subtext">Book a game, split the cost, find a squad.</p>
+
+        <div class="hero-buttons">
+          <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
+        </div>
+
+        <p class="hero-secondary">
+          <a href="#benefits">See how it works</a>
+        </p>
+
+        <div class="device-frame" aria-hidden="true">
+          <div class="device-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURES / BENEFITS ================= -->
+    <section id="benefits" class="section benefits" aria-label="Benefits">
+      <div class="container benefits-inner" data-carousel>
+        <div class="benefits-shell">
+          <!-- Blurred background image placeholder (using hero image for now) -->
+          <div class="benefits-bg" aria-hidden="true"></div>
+
+          <div class="benefits-layout">
+            <!-- LEFT: clickable benefit list + CTA -->
+            <aside class="benefits-left" aria-label="How Rulya helps">
+              <p class="benefits-eyebrow">How it works</p>
+              <div class="benefits-tabs" role="tablist" aria-label="Benefits">
+                <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="0">
+                  <span class="tab-title">Book fast</span>
+                  <span class="tab-sub">Find a game without the group chat.</span>
+                </button>
+                <button class="tab" type="button" role="tab" aria-selected="false" data-tab="1">
+                  <span class="tab-title">Fill the court</span>
+                  <span class="tab-sub">Get matched with players nearby.</span>
+                </button>
+                <button class="tab" type="button" role="tab" aria-selected="false" data-tab="2">
+                  <span class="tab-title">Split automatically</span>
+                  <span class="tab-sub">Pay your share in seconds.</span>
+                </button>
+              </div>
+
+              <div class="benefits-cta">
+                <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
+              </div>
+            </aside>
+
+            <!-- RIGHT: vertical media stack (phone/video placeholder) -->
+            <div class="benefits-right" aria-label="Benefit preview">
+              <div class="benefits-media">
+                <!-- Mobile CTA overlays on the vertical media -->
+                <a href="#waitlist" class="btn btn-primary benefits-media-cta">Join Waitlist</a>
+
+                <div class="feature-card is-active" data-slide>
+                  <div class="feature-text">
+                    <h3>Book fast</h3>
+                    <p>Game found in a couple taps. Court booked. Cost split.</p>
+                  </div>
+                  <div class="feature-media" aria-hidden="true"></div>
+                </div>
+
+                <div class="feature-card" data-slide>
+                  <div class="feature-text">
+                    <h3>Fill the court</h3>
+                    <p>See open games nearby and join instantly — no awkward DMs.</p>
+                  </div>
+                  <div class="feature-media" aria-hidden="true"></div>
+                </div>
+
+                <div class="feature-card" data-slide>
+                  <div class="feature-text">
+                    <h3>Split automatically</h3>
+                    <p>Clear pricing and automatic split so nobody is chasing payments.</p>
+                  </div>
+                  <div class="feature-media" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SIGNUP ================= -->
+    <section id="waitlist" class="section section-ice" aria-label="Waitlist">
+      <div class="container signup">
+        <div class="signup-left">
+          <h2>Stop cancelling. Start playing.</h2>
+          <p class="signup-subtext">Join the waitlist now.</p>
+
+          <!-- Styled form (we can post to Google Sheets/Forms underneath later) -->
+          <form class="waitlist-form" action="#" method="post" novalidate>
+            <label class="sr-only" for="waitlist-email">Email</label>
+
+            <div class="waitlist-row">
+              <input
+                id="waitlist-email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="123@xxx.com"
+                required
+                aria-describedby="waitlist-error waitlist-success"
+              />
+
+              <button type="submit" class="btn btn-primary">Join Waitlist</button>
+            </div>
+
+            <p class="waitlist-error" id="waitlist-error" data-error hidden>Please provide a valid email to join the waitlist.</p>
+            <p class="waitlist-success" id="waitlist-success" data-success hidden>You’re in. We’ll email you when your first games go live.</p>
+          </form>
+        </div>
+
+        <!-- Visual placeholder (swap image later) -->
+        <div class="signup-visual" aria-hidden="true"></div>
+      </div>
+    </section>
+    <!-- ================= PERSONA CAROUSEL ================= -->
+    <section class="section section-ice personas" aria-label="Personas">
+      <div class="personas-inner">
+        <div class="personas-carousel" data-persona-carousel>
+
+          <div class="personas-track" data-persona-track aria-roledescription="carousel">
+            <!-- Persona 1 -->
+            <article class="persona-card is-active" data-persona-slide
+              data-name="Young Professional"
+              data-headline="After work shouldn’t mean after 10 messages."
+              data-sub="You’ve the energy. You’ve the schedule. You just don’t have the group chat organised."
+              data-trigger="Game found in 2 taps. Court booked. Cost split"
+              data-cta="Join waitlist">
+              <div class="persona-stack" aria-hidden="true">
+                <div class="persona-img persona-img--top" aria-hidden="true"></div>
+                <div class="persona-img persona-img--bottom" aria-hidden="true"></div>
+              </div>
+
+              <div class="persona-overlay" aria-live="polite">
+                <p class="persona-name">Young Professional</p>
+                <h2 class="persona-headline">After work shouldn’t mean after 10 messages.</h2>
+                <p class="persona-sub">You’ve the energy. You’ve the schedule. You just don’t have the group chat organised.</p>
+                <p class="persona-trigger">Game found in 2 taps. Court booked. Cost split</p>
+                <a class="btn btn-primary" href="#waitlist">Join waitlist</a>
+              </div>
+            </article>
+
+            <!-- Persona 2 -->
+            <article class="persona-card" data-persona-slide
+              data-name="Expat / New in Dublin"
+              data-headline="New city. No squad."
+              data-sub="You didn’t move countries to stay in."
+              data-trigger="Casual badminton 2km away. 4 spots left."
+              data-cta="Join waitlist">
+              <div class="persona-stack" aria-hidden="true">
+                <div class="persona-img persona-img--top" aria-hidden="true"></div>
+                <div class="persona-img persona-img--bottom" aria-hidden="true"></div>
+              </div>
+              <div class="persona-overlay" aria-hidden="true"></div>
+            </article>
+
+            <!-- Persona 3 -->
+            <article class="persona-card" data-persona-slide
+              data-name="Student"
+              data-headline="Midday class break? Tight budget?"
+              data-sub="Daytime courts. Student-friendly pricing."
+              data-trigger="4 players × €8. Split automatically"
+              data-cta="Join waitlist">
+              <div class="persona-stack" aria-hidden="true">
+                <div class="persona-img persona-img--top" aria-hidden="true"></div>
+                <div class="persona-img persona-img--bottom" aria-hidden="true"></div>
+              </div>
+              <div class="persona-overlay" aria-hidden="true"></div>
+            </article>
+          </div>
+
+          </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <div class="container footer-grid">
+
+        <div class="footer-col footer-col--links">
+          <p class="footer-heading">Quick links</p>
+          <nav class="footer-links" aria-label="Quick links">
+            <a href="#">Additional menu item</a>
+            <a href="#">Additional menu item</a>
+            <a href="#">Additional menu item</a>
+          </nav>
+        </div>
+
+        <div class="footer-col footer-col--social">
+          <p class="footer-heading">Social</p>
+          <div class="footer-icons" aria-label="Social links">
+            <a class="icon" href="#" aria-label="Instagram">
+              <img src="images/instagram.png" alt="Instagram">
+            </a>
+            <a class="icon" href="#" aria-label="LinkedIn">
+              <img src="images/linkedin.png" alt="LinkedIn">
+            </a>
+            <a class="icon" href="#" aria-label="TikTok">
+              <img src="images/tiktok.png" alt="TikTok">
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- ================= BENEFITS SCRIPT ================= -->
+    <script>
+      (function () {
+        const root = document.querySelector('[data-carousel]');
+        if (!root) return;
+
+        const slides = Array.from(root.querySelectorAll('[data-slide]'));
+        const tabs = Array.from(root.querySelectorAll('[data-tab]'));
+
+        let currentIndex = 0;
+
+        function update() {
+          tabs.forEach((tab, i) => {
+            const active = i === currentIndex;
+            tab.classList.toggle('is-active', active);
+            tab.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+
+          slides.forEach((slide, i) => {
+            slide.classList.toggle('is-active', i === currentIndex);
+          });
+        }
+
+        function goTo(index) {
+          currentIndex = (index + slides.length) % slides.length;
+          update();
+        }
+
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const idx = Number(tab.getAttribute('data-tab'));
+            if (!Number.isNaN(idx)) goTo(idx);
+          });
+        });
+
+        update();
+      })();
+    </script>
+
+    <!-- ================= WAITLIST SCRIPT ================= -->
+    <script>
+      (function () {
+        const form = document.querySelector('.waitlist-form');
+        if (!form) return;
+
+        const input = form.querySelector('#waitlist-email');
+        const success = form.querySelector('[data-success]');
+        const error = form.querySelector('[data-error]');
+
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          if (!input) return;
+
+          // Reset messages
+          success.hidden = true;
+          error.hidden = true;
+
+          // Validate
+          if (!input.value) {
+            error.textContent = 'Please provide your email to join the waitlist.';
+            error.hidden = false;
+            input.focus();
+            return;
+          }
+
+          if (!input.checkValidity()) {
+            error.textContent = 'Please provide a valid email to join the waitlist.';
+            error.hidden = false;
+            input.focus();
+            return;
+          }
+
+          // Send to Google Forms (stores in Google Sheets)
+          // NOTE: This uses mode:no-cors, so we can't read a success response.
+          // We treat 'no network error thrown' as success.
+          try {
+            const fd = new FormData();
+            fd.append('entry.1326819543', input.value);
+
+            await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdFKlPUzqqatqOZuyYkz--8ABrA1dQ-wD-i5rlxLm02iBipzw/formResponse', {
+              method: 'POST',
+              mode: 'no-cors',
+              body: fd,
+            });
+          } catch (err) {
+            error.textContent = 'Something went wrong. Please try again.';
+            error.hidden = false;
+            return;
+          }
+
+          success.hidden = false;
+
+          // Fire GTM event ONLY on valid submit
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'waitlist_submit' });
+
+          input.value = '';
+        });
+
+        input.addEventListener('input', function () {
+          if (error && !error.hidden) error.hidden = true;
+        });
+      })();
+    </script>
+
+    <!-- ================= PERSONA CAROUSEL SCRIPT ================= -->
+    <script>
+      (function () {
+        const carousel = document.querySelector('[data-persona-carousel]');
+        const track = document.querySelector('[data-persona-track]');
+        if (!carousel || !track) return;
+
+        const intervalMs = 5200;
+        let timer = null;
+        let isAnimating = false;
+
+        function slides() {
+          return Array.from(track.querySelectorAll('[data-persona-slide]'));
+        }
+
+        function setActiveCenter() {
+          const s = slides();
+          s.forEach((el, i) => {
+            const active = i === 1; // center is always index 1
+            el.classList.toggle('is-active', active);
+
+            const overlay = el.querySelector('.persona-overlay');
+            if (!overlay) return;
+
+            if (active) {
+              overlay.removeAttribute('aria-hidden');
+              overlay.innerHTML = `
+                <p class="persona-name">${el.dataset.name}</p>
+                <h2 class="persona-headline">${el.dataset.headline}</h2>
+                <p class="persona-sub">${el.dataset.sub}</p>
+                <p class="persona-trigger">${el.dataset.trigger}</p>
+                <a class="btn btn-primary" href="#waitlist">${el.dataset.cta}</a>
+              `;
+            } else {
+              overlay.setAttribute('aria-hidden', 'true');
+              overlay.innerHTML = '';
+            }
+          });
+        }
+
+        function measureStep() {
+          const s = slides();
+          if (s.length < 3) return { step: 0, pad: 0 };
+
+          const first = s[0].getBoundingClientRect();
+          const second = s[1].getBoundingClientRect();
+          const gap = Math.max(0, Math.round(second.left - first.right));
+          const step = Math.round(first.width + gap);
+
+          const viewportW = carousel.getBoundingClientRect().width;
+          const pad = Math.max(0, Math.round((viewportW - first.width) / 2));
+
+          return { step, pad };
+        }
+
+        function applyCentering() {
+          const { step, pad } = measureStep();
+          if (!step) return;
+
+          track.classList.add('is-no-anim');
+          track.style.paddingLeft = pad + 'px';
+          track.style.paddingRight = pad + 'px';
+          track.style.transform = `translateX(${-step}px)`; // center slide at index 1
+          track.getBoundingClientRect(); // force reflow
+          track.classList.remove('is-no-anim');
+        }
+
+        function shiftLeft() {
+          if (isAnimating) return;
+          const { step } = measureStep();
+          if (!step) return;
+
+          isAnimating = true;
+          track.style.transform = `translateX(${-2 * step}px)`;
+
+          const onEnd = () => {
+            track.removeEventListener('transitionend', onEnd);
+
+            // Move first slide to end (loop)
+            const first = track.firstElementChild;
+            if (first) track.appendChild(first);
+
+            // Snap back to centered position (no animation)
+            track.classList.add('is-no-anim');
+            track.style.transform = `translateX(${-step}px)`;
+            track.getBoundingClientRect(); // force reflow
+            track.classList.remove('is-no-anim');
+
+            setActiveCenter();
+            isAnimating = false;
+          };
+
+          track.addEventListener('transitionend', onEnd);
+        }
+
+        function start() {
+          if (timer) window.clearInterval(timer);
+          timer = window.setInterval(shiftLeft, intervalMs);
+        }
+
+        // Init: reorder so persona 1 starts centered (index 1)
+        const s0 = slides();
+        if (s0.length >= 3) {
+          const last = track.lastElementChild;
+          if (last) track.insertBefore(last, track.firstElementChild);
+        }
+
+        setActiveCenter();
+        applyCentering();
+        start();
+
+        window.addEventListener('resize', () => {
+          applyCentering();
+        });
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            if (timer) window.clearInterval(timer);
+          } else {
+            applyCentering();
+            start();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
