@@ -393,11 +393,16 @@ a { text-decoration: none; color: inherit; }
 
 .persona-stack {
   width: 100%;
-  display: grid;
-  grid-template-rows: 1.25fr 0.85fr;
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
   gap: 14px;
   padding: 14px;
 }
+
+/* Ensure the image blocks always render (some browsers can be finicky with fr tracks) */
+.persona-img { display: block; }
 
 .persona-img {
   width: 100%;
@@ -431,6 +436,7 @@ a { text-decoration: none; color: inherit; }
 .persona-overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -438,7 +444,10 @@ a { text-decoration: none; color: inherit; }
   gap: 10px;
   color: var(--white);
   pointer-events: none;
+  text-align: center;
 }
+
+.persona-overlay .btn { margin-left: auto; margin-right: auto; }
 
 .persona-overlay::before {
   content: "";
@@ -450,6 +459,7 @@ a { text-decoration: none; color: inherit; }
 .persona-overlay > * { position: relative; z-index: 1; }
 
 .persona-name {
+  text-align: center;
   margin: 0;
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -495,6 +505,7 @@ a { text-decoration: none; color: inherit; }
   .persona-card { flex-basis: 31%; }
   .persona-card.is-active { flex-basis: 38%; }
   .persona-stack { padding: 10px; gap: 10px; }
+
   .persona-img--top { height: 240px; }
   .persona-img--bottom { height: 140px; }
   .persona-overlay { padding: 14px; }
