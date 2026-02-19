@@ -90,15 +90,18 @@
 
     <!-- ================= FEATURES / BENEFITS ================= -->
     <section id="benefits" class="section benefits" aria-label="Benefits">
-      <div class="container benefits-inner" data-carousel>
+      <div class="benefits-inner" data-carousel>
         <div class="benefits-shell">
           <!-- Blurred background image placeholder (using hero image for now) -->
           <div class="benefits-bg" aria-hidden="true"></div>
 
+          <div class="benefits-header">
+            <p class="benefits-eyebrow">How it works</p>
+          </div>
+
           <div class="benefits-layout">
-            <!-- LEFT: clickable benefit list + CTA -->
+            <!-- LEFT: clickable benefit list + active detail + CTA -->
             <aside class="benefits-left" aria-label="How Rulya helps">
-              <p class="benefits-eyebrow">How it works</p>
               <div class="benefits-tabs" role="tablist" aria-label="Benefits">
                 <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="0">
                   <span class="tab-title">Book fast</span>
@@ -114,40 +117,34 @@
                 </button>
               </div>
 
+              <!-- Active detail (mobile: shown under tabs; desktop: optional) -->
+              <div class="benefits-detail" aria-live="polite">
+                <h3 class="benefits-detail-title">Book fast</h3>
+                <p class="benefits-detail-sub">Find a game without the group chat.</p>
+              </div>
+
               <div class="benefits-cta">
                 <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
               </div>
             </aside>
 
-            <!-- RIGHT: vertical media stack (phone/video placeholder) -->
+            <!-- RIGHT: media that changes per benefit -->
             <div class="benefits-right" aria-label="Benefit preview">
               <div class="benefits-media">
-                <!-- Mobile CTA overlays on the vertical media -->
-                <a href="#waitlist" class="btn btn-primary benefits-media-cta">Join Waitlist</a>
-
                 <div class="feature-card is-active" data-slide>
-                  <div class="feature-text">
-                    <h3>Book fast</h3>
-                    <p>Game found in a couple taps. Court booked. Cost split.</p>
-                  </div>
                   <div class="feature-media" aria-hidden="true"></div>
                 </div>
 
                 <div class="feature-card" data-slide>
-                  <div class="feature-text">
-                    <h3>Fill the court</h3>
-                    <p>See open games nearby and join instantly — no awkward DMs.</p>
-                  </div>
                   <div class="feature-media" aria-hidden="true"></div>
                 </div>
 
                 <div class="feature-card" data-slide>
-                  <div class="feature-text">
-                    <h3>Split automatically</h3>
-                    <p>Clear pricing and automatic split so nobody is chasing payments.</p>
-                  </div>
                   <div class="feature-media" aria-hidden="true"></div>
                 </div>
+
+                <!-- Mobile CTA under image -->
+                <a href="#waitlist" class="btn btn-primary benefits-media-cta">Join Waitlist</a>
               </div>
             </div>
           </div>
@@ -289,8 +286,20 @@
 
         const slides = Array.from(root.querySelectorAll('[data-slide]'));
         const tabs = Array.from(root.querySelectorAll('[data-tab]'));
+        const detailTitle = root.querySelector('.benefits-detail-title');
+        const detailSub = root.querySelector('.benefits-detail-sub');
 
         let currentIndex = 0;
+
+        function tabTitle(i) {
+          const t = tabs[i]?.querySelector('.tab-title');
+          return t ? t.textContent.trim() : '';
+        }
+
+        function tabSub(i) {
+          const s = tabs[i]?.querySelector('.tab-sub');
+          return s ? s.textContent.trim() : '';
+        }
 
         function update() {
           tabs.forEach((tab, i) => {
@@ -302,6 +311,9 @@
           slides.forEach((slide, i) => {
             slide.classList.toggle('is-active', i === currentIndex);
           });
+
+          if (detailTitle) detailTitle.textContent = tabTitle(currentIndex);
+          if (detailSub) detailSub.textContent = tabSub(currentIndex);
         }
 
         function goTo(index) {
