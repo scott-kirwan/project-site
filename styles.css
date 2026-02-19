@@ -373,7 +373,6 @@ a { text-decoration: none; color: inherit; }
 .personas-carousel {
   position: relative;
   overflow: hidden; /* hides off-screen cards */
-  padding: 0 10vw; /* creates left/right peek without JS */
 }
 
 /* Track is translated left/right to move cards */
