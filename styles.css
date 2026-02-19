@@ -97,7 +97,7 @@ a { text-decoration: none; color: inherit; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 100px 0 80px;
+  padding: 150px 0 80px; /* +50px taller, more space above heading */
   background: var(--ice); /* fallback if image/video not loaded */
 }
 
@@ -116,17 +116,18 @@ a { text-decoration: none; color: inherit; }
 }
 
 
-/* Background image layer (can be replaced with a <video> later) */
-.hero-bg {
+/* Background video layer (upload: videos/hero-bg.mp4) */
+.hero-video {
   position: absolute;
   inset: 0;
-  background-image: url("images/hero-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 1; /* opaque for hero media */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   pointer-events: none;
 }
+
+/* Fallback: if video can't play, the poster (images/hero-bg.jpg) will show */
 
 .hero-content {
   position: relative;
@@ -177,8 +178,23 @@ a { text-decoration: none; color: inherit; }
 .hero-subtext {
   font-size: 18px;
   opacity: 0.85;
-  margin: 0 0 36px; /* more space before CTA */
+  margin: 0 0 22px;
 }
+
+.hero-waitlist {
+  max-width: 520px;
+  margin: 0 auto 10px;
+}
+
+.hero-waitlist .waitlist-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.hero-waitlist .waitlist-error,
+.hero-waitlist .waitlist-success {
+  text-align: left;
+}
+
 
 .hero-secondary {
   margin: 8px 0 60px;
@@ -544,7 +560,10 @@ a { text-decoration: none; color: inherit; }
 
   .hero-logo img { width: 26px; }
 
-  .hero { padding-top: 120px; }
+  .hero { padding-top: 170px; }
+
+  .hero-waitlist .waitlist-row { grid-template-columns: 1fr; }
+  .hero-waitlist .btn { width: 100%; }
 
 
   .personas { padding: 48px 0; }
