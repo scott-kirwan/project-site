@@ -50,7 +50,7 @@
       <div class="hero-bg" aria-hidden="true"></div>
 
       <div class="container hero-content">
-        <h1>Don’t text 10 people.<br>Just book a game.</h1>
+        <h1>SDon’t text 10 people.<br>Just book a game.</h1>
 
         <p class="hero-subtext">Book a game, split the cost, find a squad.</p>
 
@@ -155,6 +155,75 @@
 
         <!-- Visual placeholder (swap image later) -->
         <div class="signup-visual" aria-hidden="true"></div>
+      </div>
+    </section>
+    <!-- ================= PERSONA CAROUSEL ================= -->
+    <section class="section section-ice personas" aria-label="Personas">
+      <div class="container personas-inner">
+        <div class="personas-carousel" data-persona-carousel>
+
+          <div class="personas-track" data-persona-track aria-roledescription="carousel">
+            <!-- Persona 1 -->
+            <article class="persona-card is-active" data-persona-slide
+              data-name="Young Professional"
+              data-headline="After work shouldn’t mean after 10 messages."
+              data-sub="You’ve the energy. You’ve the schedule. You just don’t have the group chat organised."
+              data-trigger="Game found in 2 taps. Court booked. Cost split"
+              data-cta="Join waitlist">
+              <div class="persona-stack" aria-hidden="true">
+                <div class="persona-img persona-img--top" style="background-image:url('images/persona-1-top.jpg')"></div>
+                <div class="persona-img persona-img--bottom" style="background-image:url('images/persona-1-bottom.jpg')"></div>
+              </div>
+
+              <div class="persona-overlay" aria-live="polite">
+                <p class="persona-name">Young Professional</p>
+                <h2 class="persona-headline">After work shouldn’t mean after 10 messages.</h2>
+                <p class="persona-sub">You’ve the energy. You’ve the schedule. You just don’t have the group chat organised.</p>
+                <p class="persona-trigger">Game found in 2 taps. Court booked. Cost split</p>
+                <a class="btn btn-primary" href="#waitlist">Join waitlist</a>
+              </div>
+            </article>
+
+            <!-- Persona 2 -->
+            <article class="persona-card" data-persona-slide
+              data-name="Expat / New in Dublin"
+              data-headline="New city. No squad."
+              data-sub="You didn’t move countries to stay in."
+              data-trigger="Casual badminton 2km away. 4 spots left."
+              data-cta="Join waitlist">
+              <div class="persona-stack" aria-hidden="true">
+                <div class="persona-img persona-img--top" style="background-image:url('images/persona-2-top.jpg')"></div>
+                <div class="persona-img persona-img--bottom" style="background-image:url('images/persona-2-bottom.jpg')"></div>
+              </div>
+              <div class="persona-overlay" aria-hidden="true"></div>
+            </article>
+
+            <!-- Persona 3 -->
+            <article class="persona-card" data-persona-slide
+              data-name="Student"
+              data-headline="Midday class break? Tight budget?"
+              data-sub="Daytime courts. Student-friendly pricing."
+              data-trigger="4 players × €8. Split automatically"
+              data-cta="Join waitlist">
+              <div class="persona-stack" aria-hidden="true">
+                <div class="persona-img persona-img--top" style="background-image:url('images/persona-3-top.jpg')"></div>
+                <div class="persona-img persona-img--bottom" style="background-image:url('images/persona-3-bottom.jpg')"></div>
+              </div>
+              <div class="persona-overlay" aria-hidden="true"></div>
+            </article>
+          </div>
+
+          <button class="persona-arrow persona-arrow--prev" type="button" aria-label="Previous" data-persona-prev>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <button class="persona-arrow persona-arrow--next" type="button" aria-label="Next" data-persona-next>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -323,6 +392,134 @@
 
         input.addEventListener('input', function () {
           if (error && !error.hidden) error.hidden = true;
+        });
+      })();
+    </script>
+
+    <!-- ================= PERSONA CAROUSEL SCRIPT ================= -->
+    <script>
+      (function () {
+        const root = document.querySelector('[data-persona-carousel]');
+        if (!root) return;
+
+        const track = root.querySelector('[data-persona-track]');
+        const prevBtn = root.querySelector('[data-persona-prev]');
+        const nextBtn = root.querySelector('[data-persona-next]');
+
+        let slides = Array.from(root.querySelectorAll('[data-persona-slide]'));
+        let isAnimating = false;
+        let timer = null;
+        const intervalMs = 5200;
+
+        function setActive(middleIndex = 1) {
+          slides.forEach(s => s.classList.remove('is-left', 'is-active', 'is-right'));
+
+          const left = slides[(middleIndex - 1 + slides.length) % slides.length];
+          const mid = slides[middleIndex % slides.length];
+          const right = slides[(middleIndex + 1) % slides.length];
+
+          left.classList.add('is-left');
+          mid.classList.add('is-active');
+          right.classList.add('is-right');
+
+          // Only active slide gets overlay content (clean + accessible)
+          slides.forEach((s) => {
+            const overlay = s.querySelector('.persona-overlay');
+            if (!overlay) return;
+
+            if (s.classList.contains('is-active')) {
+              overlay.removeAttribute('aria-hidden');
+              overlay.innerHTML = `
+                <p class="persona-name">${s.dataset.name}</p>
+                <h2 class="persona-headline">${s.dataset.headline}</h2>
+                <p class="persona-sub">${s.dataset.sub}</p>
+                <p class="persona-trigger">${s.dataset.trigger}</p>
+                <a class="btn btn-primary" href="#waitlist">${s.dataset.cta}</a>
+              `;
+            } else {
+              overlay.setAttribute('aria-hidden', 'true');
+              overlay.innerHTML = '';
+            }
+          });
+        }
+
+        function getShiftPx() {
+          const gap = parseFloat(getComputedStyle(track).gap || '0');
+          const w = slides[0]?.getBoundingClientRect().width || 0;
+          return w + gap;
+        }
+
+        function resetAutoplay() {
+          if (timer) window.clearInterval(timer);
+          timer = window.setInterval(() => shiftLeft(), intervalMs);
+        }
+
+        function shiftLeft() {
+          if (isAnimating) return;
+          isAnimating = true;
+
+          const shiftPx = getShiftPx();
+          track.classList.add('is-shifting');
+          track.style.transform = `translateX(-${shiftPx}px)`;
+
+          const onEnd = () => {
+            track.removeEventListener('transitionend', onEnd);
+            track.classList.remove('is-shifting');
+            track.style.transform = 'translateX(0)';
+
+            const first = slides.shift();
+            slides.push(first);
+            track.appendChild(first);
+
+            setActive(1);
+            isAnimating = false;
+          };
+
+          track.addEventListener('transitionend', onEnd);
+        }
+
+        function shiftRight() {
+          if (isAnimating) return;
+          isAnimating = true;
+
+          const shiftPx = getShiftPx();
+
+          const last = slides.pop();
+          slides.unshift(last);
+          track.insertBefore(last, track.firstChild);
+
+          // Jump left then animate back to 0
+          track.classList.add('is-jump');
+          track.style.transform = `translateX(-${shiftPx}px)`;
+          track.getBoundingClientRect(); // force reflow
+
+          track.classList.remove('is-jump');
+          track.classList.add('is-shifting');
+          track.style.transform = 'translateX(0)';
+
+          const onEnd = () => {
+            track.removeEventListener('transitionend', onEnd);
+            track.classList.remove('is-shifting');
+            setActive(1);
+            isAnimating = false;
+          };
+
+          track.addEventListener('transitionend', onEnd);
+        }
+
+        prevBtn && prevBtn.addEventListener('click', () => { shiftRight(); resetAutoplay(); });
+        nextBtn && nextBtn.addEventListener('click', () => { shiftLeft(); resetAutoplay(); });
+
+        // Init
+        setActive(1);
+        resetAutoplay();
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            if (timer) window.clearInterval(timer);
+          } else {
+            resetAutoplay();
+          }
         });
       })();
     </script>
