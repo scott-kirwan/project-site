@@ -5,7 +5,7 @@
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.defer=true;j.src=
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer','GTM-WXM4BDT8');
     </script>
@@ -19,7 +19,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="styles.css" />
   </head>
 
@@ -34,9 +33,9 @@
     <!-- ================= HERO ================= -->
     <section class="hero" aria-label="Hero">
       <!-- Background video (upload: videos/hero-bg.mp4) -->
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-        <source src="videos/hero-bg.mp4" type="video/mp4" />
-      </video>
+      <video class="hero-video" autoplay muted loop playsinline preload="none" poster="images/poster-image.jpeg">
+  <source src="videos/main-video.mp4" type="video/mp4" />
+</video>
 
       <!-- Blue overlay (same tint as original hero image setup) -->
       <div class="hero-overlay" aria-hidden="true"></div>
@@ -69,7 +68,7 @@
           </div>
 
           <p class="waitlist-error" id="hero-error" data-error hidden>Please provide a valid email to join the waitlist.</p>
-          <p class="waitlist-success" id="hero-success" data-success hidden>You’re in. We’ll email you when your first games go live.</p>
+          <p class="waitlist-success" id="hero-success" data-success hidden>You’re in.</p>
         </form>
 </div>
     </section>
@@ -78,7 +77,7 @@
     <section class="hero hero--plain" aria-label="Intro">
       <div class="container origin">
         <div class="origin-media" aria-hidden="true">
-          <img src="images/origin-seagull.png" alt="" />
+         <img src="images/origin-seagull.png" alt="" width="420" height="420" loading="lazy" />
         </div>
 
         <div class="origin-copy">
@@ -89,69 +88,105 @@
     </section>
 
     <!-- ================= FEATURES / BENEFITS ================= -->
-    <section id="benefits" class="section benefits" aria-label="Benefits">
-      <div class="benefits-inner" data-carousel>
-        <div class="benefits-shell">
-          <!-- Blurred background image placeholder (using hero image for now) -->
-          <div class="benefits-bg" aria-hidden="true"></div>
+<section id="benefits" style="padding: 60px 0; background-color: #f8fafc; overflow: hidden;">
+  <style>
+    /* Default Desktop Styles */
+    .benefits-flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .phone-mockup {
+      width: 420px;
+      height: 800px;
+      border: none;
+      border-radius: 40px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
 
-          <div class="benefits-header">
-            <p class="benefits-eyebrow">How it works</p>
-          </div>
+    /* Mobile Optimization: Ensuring both fit on one screen */
+    @media (max-width: 768px) {
+      #benefits {
+        padding: 30px 0 !important;
+      }
+      .benefits-flex-container {
+        flex-direction: column !important;
+        gap: 20px !important;
+        text-align: center;
+      }
+      .text-content {
+        min-width: unset !important;
+        flex: unset !important;
+      }
+      /* We keep the font family from your class but scale size for mobile visibility */
+      #main-heading {
+        font-size: 28px !important; 
+        margin-bottom: 15px !important;
+        line-height: 1.2 !important;
+      }
+      .btn-primary {
+        padding: 12px 24px !important;
+      }
+      .mockup-container {
+        min-width: unset !important;
+        width: 100%;
+        margin-top: 0 !important;
+      }
+      .phone-mockup {
+        width: 320px !important;
+        height: 580px !important;
+        transform: scale(0.85); /* Slightly larger scale than before */
+        transform-origin: top center;
+        margin-bottom: -80px; /* Adjusting for the scale overlap */
+      }
+    }
+  </style>
 
-          <div class="benefits-layout">
-            <!-- LEFT: clickable benefit list + active detail + CTA -->
-            <aside class="benefits-left" aria-label="How Rulya helps">
-              <div class="benefits-tabs" role="tablist" aria-label="Benefits">
-                <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="0">
-                  <span class="tab-title">Book fast</span>
-                  <span class="tab-sub">Find a game without the group chat.</span>
-                </button>
-                <button class="tab" type="button" role="tab" aria-selected="false" data-tab="1">
-                  <span class="tab-title">Fill the court</span>
-                  <span class="tab-sub">Get matched with players nearby.</span>
-                </button>
-                <button class="tab" type="button" role="tab" aria-selected="false" data-tab="2">
-                  <span class="tab-title">Split automatically</span>
-                  <span class="tab-sub">Pay your share in seconds.</span>
-                </button>
-              </div>
+  <div class="benefits-flex-container">
+    <div class="text-content" style="flex: 1; min-width: 320px;"> 
+      <h2 id="main-heading" class="plain-hero-title" style="color: #1e293b; margin-bottom: 24px; line-height: 1.1;">
+        Everything you need to play, in one app.
+      </h2>
+      
+      <ul id="benefit-list" style="list-style: none; padding: 0; margin: 0;"></ul>
 
-              <!-- Active detail (mobile: shown under tabs; desktop: optional) -->
-              <div class="benefits-detail" aria-live="polite">
-                <h3 class="benefits-detail-title">Book fast</h3>
-                <p class="benefits-detail-sub">Find a game without the group chat.</p>
-              </div>
+      <a href="#waitlist" class="btn btn-primary" style="padding: 16px 32px; border-radius: 12px; background-color: #F16D34; color: white; text-decoration: none; display: inline-block; font-weight: bold;">
+        Join Waitlist
+      </a>
+    </div>
 
-              <div class="benefits-cta">
-                <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
-              </div>
-            </aside>
+    <div class="mockup-container" style="flex: 1; min-width: 320px; display: flex; justify-content: center;">
+      <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy"></iframe>
+    </div>
+  </div>
 
-            <!-- RIGHT: media that changes per benefit -->
-            <div class="benefits-right" aria-label="Benefit preview">
-              <div class="benefits-media">
-                <div class="feature-card is-active" data-slide>
-                  <div class="feature-media" aria-hidden="true"></div>
-                </div>
+  <script>
+    window.addEventListener("message", (event) => {
+      const heading = document.getElementById("main-heading");
+      const list = document.getElementById("benefit-list");
 
-                <div class="feature-card" data-slide>
-                  <div class="feature-media" aria-hidden="true"></div>
-                </div>
-
-                <div class="feature-card" data-slide>
-                  <div class="feature-media" aria-hidden="true"></div>
-                </div>
-
-                <!-- Mobile CTA under image -->
-                <a href="#waitlist" class="btn btn-primary benefits-media-cta">Join Waitlist</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+      switch (event.data) {
+        case "connect":
+          heading.innerText = "Everything you need to play, in one app.";
+          list.innerHTML = ""; 
+          break;
+        case "courts":
+          heading.innerText = "Find courts near you";
+          list.innerHTML = "";
+          break;
+        case "sports":
+          heading.innerText = "Choose between different sports";
+          list.innerHTML = "";
+          break;
+      }
+    });
+  </script>
+</section>
     <!-- ================= SIGNUP ================= -->
     <section id="waitlist" class="section section-ice" aria-label="Waitlist">
       <div class="container signup">
@@ -286,20 +321,8 @@
 
         const slides = Array.from(root.querySelectorAll('[data-slide]'));
         const tabs = Array.from(root.querySelectorAll('[data-tab]'));
-        const detailTitle = root.querySelector('.benefits-detail-title');
-        const detailSub = root.querySelector('.benefits-detail-sub');
 
         let currentIndex = 0;
-
-        function tabTitle(i) {
-          const t = tabs[i]?.querySelector('.tab-title');
-          return t ? t.textContent.trim() : '';
-        }
-
-        function tabSub(i) {
-          const s = tabs[i]?.querySelector('.tab-sub');
-          return s ? s.textContent.trim() : '';
-        }
 
         function update() {
           tabs.forEach((tab, i) => {
@@ -311,9 +334,6 @@
           slides.forEach((slide, i) => {
             slide.classList.toggle('is-active', i === currentIndex);
           });
-
-          if (detailTitle) detailTitle.textContent = tabTitle(currentIndex);
-          if (detailSub) detailSub.textContent = tabSub(currentIndex);
         }
 
         function goTo(index) {
