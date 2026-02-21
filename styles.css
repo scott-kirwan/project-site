@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 @font-face {
   font-family: 'ZT Otez';
   src: url('fonts/zt-otez.regular.woff2') format('woff2');
@@ -45,6 +48,8 @@ a { text-decoration: none; color: inherit; }
 .section {
   padding: 60px 0;
   background: var(--white);
+  /* Ensures smooth scroll doesn't land flush against the top edge */
+  scroll-margin-top: 20px; 
 }
 
 .section-ice {
@@ -94,40 +99,49 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ===== HERO ===== */
+/* Ensure the hero takes up the full mobile height */
 .hero {
   position: relative;
+  height: 100vh; /* Fallback for older browsers */
+  height: 100dvh; /* Magic fix: Dynamic Viewport Height */
+  width: 100%;
   overflow: hidden;
-  padding: 150px 0 80px; /* space above heading to see video */
-  background: var(--ice); /* fallback if video fails */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Video layer */
+/* Force the video to act like a background cover */
 .hero-video {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
-  pointer-events: none;
-  z-index: 0;
-  display: block;
-  background: var(--ice); /* avoids black flash before first frame on some mobiles */
+  /* This is the magic line that removes black edges */
+  object-fit: cover; 
+  z-index: -1;
 }
 
-/* Blue tint overlay over the video */
+/* Ensure the overlay also covers everything */
 .hero-overlay {
   position: absolute;
-  inset: 0;
-  background: rgba(187, 224, 239, 0.2); /* --ice at 20% */
-  pointer-events: none;
-  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Adjust tint as needed */
+  z-index: 0;
 }
 
+/* Keep content centered and on top */
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   text-align: center;
+  color: white;
+  width: 100%;
+  padding: 0 20px;
 }
 
 /* Logo positioned top-left inside hero */
@@ -161,10 +175,14 @@ a { text-decoration: none; color: inherit; }
 }
 
 .hero-waitlist {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   max-width: 520px;
-  margin: 0 auto 10px;
+  margin: 0 auto;
 }
-
 .hero-waitlist .waitlist-row {
   grid-template-columns: minmax(0, 1fr) auto;
 }
@@ -189,10 +207,54 @@ a { text-decoration: none; color: inherit; }
   color: var(--coral);
 }
 
-/* Plain hero: solid ice background, no video / overlay / logo */
+/* ===== ORIGIN STORY (FUTURE.CO STYLE UPGRADE) ===== */
 .hero--plain {
-  background: var(--ice);
-  padding: 70px 0 70px;
+  position: relative;
+  background-color: var(--ice);
+  /* Mesh Gradient: Adds high-energy depth behind the seagull */
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(241, 109, 52, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 152, 106, 0.12) 0%, transparent 50%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 100px 0;
+}
+
+/* Add a sporty pitch-line texture using an overlay */
+.hero--plain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image: 
+    linear-gradient(var(--midnight) 1px, transparent 1px),
+    linear-gradient(90deg, var(--midnight) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Origin Content Layout */
+.origin {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* Glassmorphism Card for the text */
+.origin-copy {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(22, 30, 84, 0.06);
+  text-align: left;
 }
 
 .hero--plain .hero-video,
@@ -263,7 +325,7 @@ a { text-decoration: none; color: inherit; }
   }
 
   .hero--plain {
-    padding: 20px 0 50px; /* further reduced top space on mobile */
+    padding: 40px 0 60px; /* reduced top space on mobile */
   }
 
   .origin-copy { text-align: center; }
@@ -275,29 +337,27 @@ a { text-decoration: none; color: inherit; }
 /* ===== BENEFITS (Future.co-style) ===== */
 .benefits {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 48px 0;
 }
 
-/* Full-bleed background (shell goes edge-to-edge) */
+/* Slightly shorter overall section height */
+.benefits { padding: 48px 0; }
+
 .benefits-inner {
-  width: 100%;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  position: relative;
 }
 
+/* One unified shell that contains BOTH left + right */
 .benefits-shell {
   position: relative;
-  width: 100%;
-  border-radius: 0;           /* full width background */
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border-top: 1px solid rgba(22, 30, 84, 0.10);
-  border-bottom: 1px solid rgba(22, 30, 84, 0.10);
+  border: 1px solid rgba(22, 30, 84, 0.10);
   background: rgba(255, 255, 255, 0.60);
   box-shadow: 0 16px 60px rgba(22, 30, 84, 0.12);
-  padding: 32px 0;
+  padding: 32px;
 }
 
 /* Blurred background sits INSIDE the shell */
@@ -311,14 +371,25 @@ a { text-decoration: none; color: inherit; }
   transform: scale(1.10);
   opacity: 0.55;
   pointer-events: none;
+  /* Tells the browser to optimize this layer */
+  will-change: transform; 
 }
 
-.benefits-header {
+.benefits-layout {
   position: relative;
   z-index: 1;
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 44px;
+  align-items: center;
+}
+
+/* Left panel is now "floating content" inside the shared shell */
+.benefits-left {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 .benefits-eyebrow {
@@ -328,26 +399,6 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(22, 30, 84, 0.70);
-}
-
-.benefits-layout {
-  position: relative;
-  z-index: 1;
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 48px;
-  display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: 44px;
-  align-items: stretch; /* allows vertical alignment */
-}
-
-/* LEFT column: tabs top, CTA bottom (aligned to media height) */
-.benefits-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100%;
 }
 
 .benefits-tabs {
@@ -394,26 +445,6 @@ a { text-decoration: none; color: inherit; }
   border-color: rgba(22, 30, 84, 0.22);
 }
 
-/* Detail text (used mainly on mobile) */
-.benefits-detail {
-  display: none;
-  margin-top: 14px;
-}
-
-.benefits-detail-title {
-  font-family: 'ZT Otez', 'Inter', sans-serif;
-  font-weight: 400;
-  margin: 0 0 6px;
-  font-size: 18px;
-  color: var(--midnight);
-}
-
-.benefits-detail-sub {
-  margin: 0;
-  font-size: 14px;
-  opacity: 0.85;
-}
-
 .benefits-cta {
   margin-top: 18px;
 }
@@ -424,22 +455,47 @@ a { text-decoration: none; color: inherit; }
 }
 
 .benefits-media {
-  width: min(480px, 100%); /* slightly smaller than before */
+  width: min(520px, 100%);
   position: relative;
+}
+
+/* Mobile-only CTA overlay */
+.benefits-media-cta {
+  display: none;
 }
 
 .benefits-media .feature-card {
   display: none;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 36px;
+  padding: 22px;
+  color: var(--white);
+  box-shadow: 0 18px 60px rgba(22, 30, 84, 0.25);
+  backdrop-filter: blur(6px);
 }
 
 .benefits-media .feature-card.is-active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* Vertical media placeholder */
+.benefits-media .feature-text h3 {
+  color: var(--white);
+  font-size: 32px;
+  margin: 0 0 10px;
+}
+
+.benefits-media .feature-text p {
+  color: rgba(255,255,255,0.88);
+  font-size: 16px;
+  opacity: 1;
+}
+
+/* Vertical media placeholder (use hero image for now so you can see it working) */
 .benefits-media .feature-media {
-  width: 92%;              /* slightly smaller */
-  margin: 0 auto;
+  width: 100%;
   aspect-ratio: 9 / 16;
   border-radius: 26px;
   background-image: url("images/hero-bg.jpg");
@@ -447,68 +503,6 @@ a { text-decoration: none; color: inherit; }
   background-position: center;
   outline: 1px solid rgba(255,255,255,0.20);
   overflow: hidden;
-}
-
-/* Mobile CTA: under image */
-.benefits-media-cta {
-  display: none;
-  margin: 14px auto 0;
-  width: 92%;
-}
-
-@media (max-width: 960px) {
-  .benefits-layout {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .benefits-left {
-    justify-content: flex-start;
-  }
-
-  /* Tabs become headings only, small, fit across */
-  .benefits-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 6px;
-  }
-
-  .tab {
-    padding: 10px 10px;
-    border-radius: 999px;
-    text-align: center;
-  }
-
-  .tab-title {
-    margin: 0;
-    font-size: 12px;
-    line-height: 1.1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .tab-sub { display: none; }
-
-  /* Show the selected subtext under the tabs */
-  .benefits-detail { display: block; }
-
-  /* Hide left CTA on mobile; CTA goes under image */
-  .benefits-cta { display: none; }
-
-  .benefits-media {
-    width: 100%;
-  }
-
-  .benefits-media .feature-media {
-    width: 100%;
-  }
-
-  .benefits-media-cta {
-    display: inline-flex;
-    justify-content: center;
-  }
 }
 
 
@@ -546,9 +540,9 @@ a { text-decoration: none; color: inherit; }
   gap: 22px;
   align-items: stretch;
   will-change: transform;
+  backface-visibility: hidden; /* Prevents 1px shifting/jumps after animation */
   transition: transform 900ms cubic-bezier(0.22, 0.65, 0.3, 1);
 }
-
 .personas-track.is-no-anim {
   transition: none !important;
 }
@@ -864,13 +858,66 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 960px) {
   .container { padding: 0 24px; }
 
-  /* Signup */
+  /* Benefits */
+  .benefits-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .tab {
+    border: 1px solid rgba(22, 30, 84, 0.18);
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--midnight);
+    padding: 10px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .tab.is-active {
+    background: rgba(255, 152, 106, 0.22);
+    border-color: rgba(255, 152, 106, 0.65);
+  }
+
+  .carousel-btn { display: none; }
+
+  .benefits-track {
+    position: static;
+    height: auto;
+    width: 100%;
+  }
+
+  .benefits-track .feature-card {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    transition: none;
+    display: none;
+  }
+
+  .benefits-track .feature-card.is-active { display: flex; }
+
+    /* Signup */
   .signup { grid-template-columns: 1fr; }
 
-  .waitlist-row { grid-template-columns: 1fr; }
-  .waitlist-row .btn { width: 100%; text-align: center; }
+  .waitlist-row {
+    grid-template-columns: 1fr;
+  }
 
-  .signup-visual { height: 220px; }
+  .waitlist-row .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .signup-visual {
+    height: 220px;
+  }
 }
 
 @media (min-width: 961px) {
